@@ -1,5 +1,5 @@
 # Scarlet Smash Bot(Still in development, has not been deployed yet)
-A Discord Bot made in discord.js to supplement the Scarlet Smash club's discord server at Rutgers University.
+A Discord Bot made in discord.js to supplement the Scarlet Smash club's discord server at Rutgers University. Utilizes a command handler that dynamically executes commands and makes it easy to create many different commands.
 
 
 
