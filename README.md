@@ -3,7 +3,7 @@ A Discord Bot made in discord.js to supplement the Scarlet Smash club's discord 
 
 
 
-# Current Features
+# Current Features<br /> 
 Command List(Most of these were created for learning purposes)<br /> 
 -Avatar: Gets avatar url of a user<br />
 -Ban: Bans a tagged user<br />
@@ -15,12 +15,11 @@ Command List(Most of these were created for learning purposes)<br />
 -Server: Provides server name and members<br />
 -User-info: Provides username and id<br />
 
-# Planned Features(will add more as project continues)
+# Planned Features(will add more as project continues)<br /> 
 -Ban/Kick/Mute/Purge work only for people with admin permissions on server<br />
 -Improved help command that returns a list in an embedded message<br />
 -Create a custom welcome message for new members-Once user adds a role, then welcome then in the general channel<br />
 -Cannot see other channels until a role is added(for new members)<br />
 -Add role reactions(react with a certain emote to get the role)<br />
--
 
 
