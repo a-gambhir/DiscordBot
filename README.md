@@ -16,6 +16,7 @@ Command List(Most of these were created for learning purposes)<br />
 -User-info: Provides username and id<br />
 
 # Planned Features(will add more as project continues)<br /> 
+-Hide bot token<br />
 -Ban/Kick/Mute/Purge work only for people with admin permissions on server<br />
 -Improved help command that returns a list in an embedded message<br />
 -Create a custom welcome message for new members-Once user adds a role, then welcome then in the general channel<br />
