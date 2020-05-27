@@ -1,4 +1,4 @@
-//e
+
 
 const fs = require('fs');//fs = file system module
 const Discord = require('discord.js'); 
