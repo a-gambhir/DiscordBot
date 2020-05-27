@@ -4,7 +4,7 @@ A Discord Bot made in discord.js to supplement the Scarlet Smash club's discord 
 
 
 # Current Features
-Command List(Most of these were created for learning purposes)
+Command List(Most of these were created for learning purposes) \n
 -Avatar: Gets avatar url of a user
 -Ban: Bans a tagged user
 -Help: Sends a DM with a list of all available commands or info about a specific command
