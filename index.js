@@ -27,9 +27,7 @@ client.once('ready', () => { //when client is ready, print to console
 
 client.on('message', message => {
 
-  if(message.content.toLowerCase().includes('creeper')) {
-    message.channel.send('aw man');
-  }
+ 
 
   if(!message.content.startsWith(prefix) || message.author.bot) return;//if message doesnt start w prefix,ignore it
 
