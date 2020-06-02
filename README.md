@@ -16,9 +16,9 @@ Command List<br />
 
 # Planned Features(List will be updated over time)<br /> 
 -Hide bot token - DONE<br />
--Ban/Kick/Mute/Purge work only for people with admin permissions on server<br />
+-Ban/Kick/Mute/Purge work only for users with admin permissions on server<br />
 -Improved help command that returns a list in an embedded message-DONE<br />
--Create a custom welcome message for new members-Once user adds a role, then welcome then in the general channel<br />
+-Create a custom welcome message for new members-Once user adds a role, then welcome them in the general channel<br />
 -Cannot see other channels until a role is added(for new members)<br />
 -Add role reactions(react with a certain emote to get the role)<br />
 -Support for custom commands<br />
