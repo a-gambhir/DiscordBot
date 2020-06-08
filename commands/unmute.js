@@ -20,11 +20,11 @@ module.exports = {
             const muteRole = taggedUser.roles.find(role => role.name === 'Muted');                
 
             if(!muteRole){
-                return message.reply('User has not been muted.')       
+                return message.reply('user has not been muted.')       
             }
             else{
                 taggedUser.removeRole(muteRole);
-                message.reply("User has been unmuted.");
+                return message.reply("user has been unmuted.");
             }
 
 

@@ -5,18 +5,22 @@ module.exports = {
   
     async execute(message,args){
 
+      let muteRole = message.guild.roles.find(`name`,"Muted");
+      let taggedUser = message.mentions.members.first() || message.guild.members.get(args[0]);//message.guild.members.get returns user id, either method in or statement works
+      let hasMuteRole = taggedUser.roles.find(role => role.name === 'Muted');    
+      
+
       if(message.member.roles.find(r => r.name === "Admin")){
         console.log("Role found");
+
+        if(!hasMuteRole){
 
         const ms = require("ms");
   
         if(!message.mentions.users.size){
             return message.reply('You need to tag a user in order to mute them.')
         }
-    
-        let taggedUser = message.mentions.members.first() || message.guild.members.get(args[0]);//message.guild.members.get returns user id, either method in or statement works
-        
-        let muteRole = message.guild.roles.find(`name`,"Muted");
+            
     
           if(!muteRole) { //if "Muted" role does not exist in server, create it
           try{
@@ -41,22 +45,38 @@ module.exports = {
         }
     
         let muteTime = args[1];
-         //still need to do: if no time mentioned, mute indefinitely
-        if(!muteTime) return message.reply("You did not specify a time.").catch(err => console.log(err)); 
-    
-    
-        
-    
-        await(taggedUser.addRole(muteRole.id));
-        message.reply(`${taggedUser.user.username} has been muted for ${ms(ms(muteTime), {long: true})}.`);
-    
-        setTimeout(function(){
-          taggedUser.removeRole(muteRole.id);
-          message.channel.send(`${taggedUser.user.username} has been unmuted.`);
-        }, ms(muteTime));
+         
+        if(!muteTime){
 
+          //return message.reply("You did not specify a time.").catch(err => console.log(err));
+
+          await(taggedUser.addRole(muteRole.id));
+          message.reply(`${taggedUser.user.username} has been muted.`);
+
+        }
+        else{
+
+          await(taggedUser.addRole(muteRole.id));
+        message.reply(`${taggedUser.user.username} has been muted for ${ms(ms(muteTime), {long: true})}.`);
+
+
+
+          setTimeout(function(){
+            taggedUser.removeRole(muteRole.id);
+            message.channel.send(`${taggedUser.user.username} has been unmuted.`);
+          }, ms(muteTime));
+
+        }
+    
+
+      }
+      else{
+        return message.reply('User is already muted.');
 
       } 
+
+    }
+
       else{
         return message.reply('You do not have permission to perform that action.');
       }
