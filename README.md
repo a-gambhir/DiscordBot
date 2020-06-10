@@ -19,6 +19,7 @@ Command List<br />
 -Ban/Kick/Mute/Purge work only for users with admin permissions on server<br />
 -Improved help command that returns a list in an embedded message-DONE<br />
 -Create a custom welcome message for new members-Once user adds a role, then welcome them in the general channel<br />
+-Allow admins to control what roles users can add(to prevent any user from adding admin/other roles they shouldnt have)<br />
 -Cannot see other channels until a role is added(for new members)<br />
 -Add role reactions(react with a certain emote to get the role)<br />
 -Support for custom commands<br />

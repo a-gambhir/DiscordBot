@@ -5,32 +5,50 @@ module.exports ={
    async execute(message, args){
 
 
+       //admins can set a list of roles that can be added by any user
+       //ex: !role allow Invader 
+
+       
+       let roleName = args.slice(1).join(' ');
+       let role = message.guild.roles.find(r => r.name.toLowerCase() === roleName);
+       var allowedRoles;
+
+       if(args[0].toLowerCase() === 'allow'){
+
+        
+
+
+       }
+
+
         if(args[0].toLowerCase() === 'list'){
-            message.reply('Avaliable roles: Scarlet Smasher, Invader, Alumni, Wi-Fi');//update to display w/embed
+            message.reply('Avaliable roles: ');//update to display available roles for given guild(server) that is set by admin
         }
         else{
+
+        if(!role){
+          return message.reply("That role does not exist.");
+        }
+
+
+
         
-        let roleName = args[1].toLowerCase();//works for roles with 2 names too
-        let role = message.guild.roles.find(r => r.name.toLowerCase() === roleName);
+
+        
+
+
+
         let member = message.member;
 
-        if(args[2]){
         
-        let roleName2 = args[2].toLowerCase();    
-        role = message.guild.roles.find(r => r.name.toLowerCase() == roleName + " " + roleName2);    
-
-        }
-        else{
-        
-        }
 
         if(args[0].toLowerCase() === 'add'){
           await member.addRole(role).catch(console.error);
-          message.reply("Role has been added.");
+         return message.reply("Role has been added.");
         }
         else if(args[0].toLowerCase() == 'remove'){
           await member.removeRole(role).catch(console.error);
-          message.reply("Role has been removed.");
+         return message.reply("Role has been removed.");
         }
         
         
