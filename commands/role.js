@@ -7,6 +7,8 @@ module.exports ={
 
        //admins can set a list of roles that can be added by any user
        //ex: !role allow Invader 
+       //case for user entering just !role - display list of options 
+       //if role doesnt exist return error message
 
        
        let roleName = args.slice(1).join(' ');
@@ -16,8 +18,6 @@ module.exports ={
        if(args[0].toLowerCase() === 'allow'){
 
         
-
-
        }
 
 
@@ -29,14 +29,6 @@ module.exports ={
         if(!role){
           return message.reply("That role does not exist.");
         }
-
-
-
-        
-
-        
-
-
 
         let member = message.member;
 

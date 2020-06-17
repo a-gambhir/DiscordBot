@@ -2,6 +2,7 @@
 
 const fs = require('fs');//fs = file system module
 const Discord = require('discord.js'); 
+const{ RichEmbed } = require('discord.js');
 const ms = require('ms'); // ms package converts time to ms
 const { prefix, token } = require('./config.json');
 
@@ -28,7 +29,6 @@ client.once('ready', () => { //when client is ready, print to console
 client.on('message', message => {
 
  
-
   if(!message.content.startsWith(prefix) || message.author.bot) return;//if message doesnt start w prefix,ignore it
 
   const args = message.content.slice(prefix.length).split(/ +/);
@@ -44,7 +44,7 @@ client.on('message', message => {
   }
 
   if (command.args && !args.length){
-   let reply = `You didn't provide any arguments, ${message.author}!`;
+   let reply = `You didn't provide any arguments.`;
   
 
   if(command.usage){
@@ -53,6 +53,9 @@ client.on('message', message => {
 
   return message.channel.send(reply);
 }
+
+
+ 
 
 
   if(!cooldowns.has(command.name)) {
@@ -89,6 +92,91 @@ client.on('message', message => {
   
 });
 
-
-
 client.login(token);//login to discord w/token
+
+
+
+//Role reactions
+client.on('raw', event => { //occurs whenever any event happens
+  console.log(event);
+  const eventName = event.t; //t maps to event name(looking for message react)
+  if(eventName === 'MESSAGE_REACTION_ADD'){
+    
+    if(event.d.message_id === '722909320693547051'){ //msg id for role reactions in testing guild
+      console.log("Reacted to correct message.");
+
+      var channel = client.channels.get(event.d.channel_id); //gets channel id from json object, can also put in channel id manually
+      if(channel.messages.has(event.d.message_id)){
+        return;
+      }   
+      else{
+        channel.fetchMessage(event.d.message_id)
+        .then(msg => {
+          var msgReaction = msg.reactions.get(event.d.emoji.name + ":" + event.d.emoji.id);
+          var user = client.users.get(event.user_id);
+          client.emit('messageReactionAdd', msgReaction, user);//calls this event
+        })
+        .catch(err => console.log(err));
+      }
+
+    }
+
+  }
+  else if(eventName === 'MESSAGE_REACTION_REMOVE'){
+
+    if(event.d.message_id === '722909320693547051'){ //msg id for role reactions in testing guild
+      console.log("Reacted to correct message.");
+
+      var channel = client.channels.get(event.d.channel_id); //gets channel id from json object, can also put in channel id manually
+      if(channel.messages.has(event.d.message_id)){
+        return;
+      }   
+      else{
+        channel.fetchMessage(event.d.message_id)
+        .then(msg => {
+          var msgReaction = msg.reactions.get(event.d.emoji.name + ":" + event.d.emoji.id);
+          var user = client.users.get(event.user_id);
+          client.emit('messageReactionRemove', msgReaction, user);//calls this event
+        })
+        .catch(err => console.log(err));
+      }
+
+    }
+
+  }
+
+})
+
+client.on('messageReactionAdd', (messageReaction, user) => { 
+
+  var role = messageReaction.message.guild.roles.get('609201823198347266')//scarlet smasher role id in testing server
+  var emojiName = messageReaction.emoji.name.toLowerCase();
+
+  if(emojiName === "moai"){
+    var member = messageReaction.message.guild.members.find(member => member.id === user.id);
+
+     if(member)
+     {
+       member.addRole(role);
+     } 
+
+  }
+
+}); 
+
+client.on('messageReactionRemove', (messageReaction, user) => {
+
+  var role = messageReaction.message.guild.roles.get('609201823198347266')//scarlet smasher role id in testing server
+  var emojiName = messageReaction.emoji.name.toLowerCase();
+
+  if(emojiName === "moai"){
+    var member = messageReaction.message.guild.members.find(member => member.id === user.id);
+
+     if(member)
+     {
+       member.removeRole(role);
+     } 
+
+  }
+
+})
