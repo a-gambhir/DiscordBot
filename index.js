@@ -54,8 +54,30 @@ client.on('message', message => {
   return message.channel.send(reply);
 }
 
+//Deleting message audit log
+client.on('messageDelete', async message => {
 
- 
+  if(!message.guild) return; //if message not deleted in guild, return
+
+  const logs = await message.guild.fetchAuditLogs({
+    limit: 1,
+    type: 'MESSAGE_DELETE',
+  });
+  
+  const deleteLog = logs.entries.first();
+
+  //user object of whoever deleted message
+  const{executor, target} = deleteLog;
+
+
+  if(target.id === message.author.id) {
+    console.log(`${executor.tag} deleted a message by ${message.author.tag}`);
+  }
+  else{
+    console.log(`A message by ${message.author.tag} was deleted.`)
+  }
+
+});
 
 
   if(!cooldowns.has(command.name)) {
@@ -91,6 +113,7 @@ client.on('message', message => {
 
   
 });
+
 
 client.login(token);//login to discord w/token
 
@@ -147,7 +170,7 @@ client.on('raw', event => { //occurs whenever any event happens
 
 })
 
-client.on('messageReactionAdd', (messageReaction, user) => { 
+client.on('messageReactionAdd', (messageReaction, user) => { //add for other roless
 
   var role = messageReaction.message.guild.roles.get('609201823198347266')//scarlet smasher role id in testing server
   var emojiName = messageReaction.emoji.name.toLowerCase();
