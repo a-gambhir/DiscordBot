@@ -14,14 +14,17 @@ Command List<br />
 -Server: Provides server name and members<br />
 -User-info: Provides username and id<br />
 
-# Planned Features(List will be updated over time)<br /> 
--Hide bot token - DONE<br />
+# Planned Features/Personal Checklist(List will be updated over time)<br /> 
 -Ban/Kick/Mute/Purge work only for users with admin permissions on server-DONE<br />
 -Improved help command that returns a list in an embedded message-DONE<br />
 -Create a custom welcome message for new members-Once user adds a role, then welcome them in the general channel<br />
 -Cannot see other channels until a role is added(for new members)-DONE<br />
 -Add role reactions(react with a certain emote to get the role)-DONE<br />
+-Update role reactions to be a modular command to work on any guild<br />
+-Eval command(run any line of javascript code) <br />
 -Implement audit log functionality<br />
+-Connect to a MySQL server and run queries and display output<br />
+-Schedule messages(announcements)<br />
 -Support for custom commands<br />
 
 

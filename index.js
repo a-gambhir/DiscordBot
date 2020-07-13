@@ -4,7 +4,7 @@ const fs = require('fs');//fs = file system module
 const Discord = require('discord.js'); 
 const{ RichEmbed } = require('discord.js');
 const ms = require('ms'); // ms package converts time to ms
-const { prefix, token } = require('./config.json');
+const { prefix, token, ownerID } = require('./config.json');
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection(); 
@@ -54,27 +54,50 @@ client.on('message', message => {
   return message.channel.send(reply);
 }
 
-//Deleting message audit log
-client.on('messageDelete', async message => {
+//Deleting message audit log- bot needs VIEW_AUDIT_LOGS permission
+//does not show who deleted the message
+client.on("messageDelete", (message) => {
 
-  if(!message.guild) return; //if message not deleted in guild, return
+  if (message) {
 
-  const logs = await message.guild.fetchAuditLogs({
-    limit: 1,
-    type: 'MESSAGE_DELETE',
-  });
-  
-  const deleteLog = logs.entries.first();
+    if (!message.content && message.attachments) {
 
-  //user object of whoever deleted message
-  const{executor, target} = deleteLog;
+      let user = message.author;
 
+      let embed = new Discord.RichEmbed()
+        .setAuthor(`${user.username}#${user.discriminator}`, user.avatarURL)
+        .setDescription(message.member + " deleted in channel " + message.guild.channels.find(channel => channel.name === message.channel.name))
+        .addField("Message", `Contained image/attachment`)
+        .addField("Time created", new Date(message.createdTimestamp).toString())
+        .setFooter("ID: " + message.id)
+        .setTimestamp();
 
-  if(target.id === message.author.id) {
-    console.log(`${executor.tag} deleted a message by ${message.author.tag}`);
-  }
-  else{
-    console.log(`A message by ${message.author.tag} was deleted.`)
+      message.guild.channels.find(channel => channel.name === "log").send(embed);
+
+    } else {
+
+      try {
+
+        let user = message.author;
+
+        let embed = new Discord.RichEmbed()
+          .setAuthor(`${user.username}#${user.discriminator}`, user.avatarURL)
+          .setDescription(message.member + " deleted in channel " + message.guild.channels.find(channel => channel.name === message.channel.name))
+          .addField("Message", `${message.content}`)
+          .addField("Time created", new Date(message.createdTimestamp).toString())
+          .setFooter("ID: " + message.id)
+          .setTimestamp();
+
+        message.guild.channels.find(channel => channel.name === "logs").send(embed);
+
+      } catch (error) {
+
+        console.error("message deleted");
+
+      }
+
+    }
+
   }
 
 });
@@ -121,7 +144,7 @@ client.login(token);//login to discord w/token
 
 //Role reactions
 client.on('raw', event => { //occurs whenever any event happens
-  console.log(event);
+  //console.log(event);
   const eventName = event.t; //t maps to event name(looking for message react)
   if(eventName === 'MESSAGE_REACTION_ADD'){
     

@@ -5,14 +5,23 @@ module.exports = {
 
     execute(message, args){
 
-        var mysql      = require('mysql');
+        var mysql = require('mysql');
         var con = mysql.createConnection({
-            host     : 'localhost',
-            database : 'dbname',
-            user     : 'username',
-            password : 'password',
+            host     : '192.168.1.23',
+            database : 'testDB',
+            user     : 'root',
+            password : 'root',
         });
           
+        con.connect(error => {
+            if(error){
+                throw error;
+            }
+            message.reply("Connected to database.");
+        })
+
+
+
 
 
     }
