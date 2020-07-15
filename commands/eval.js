@@ -1,5 +1,6 @@
-const { MessageEmbed } = require("discord.js");
-const beautify = require("beautify")
+const { RichEmbed } = require("discord.js");
+const Discord = require('discord.js');
+const beautify = require("beautify");
 //const ownerID = require('./config.json');
 
 module.exports = {
@@ -7,15 +8,20 @@ module.exports = {
     name:'eval',
     description:'Executes given javascript code',
 
-    execute(client, message, args){
+    async execute(message, args){
 
         
         if(message.author.id !== "83549337212157952")  {
-            return message.reply("Only the bot owner can use this command.");
+            return message.reply("Only the bot owner can use this command.")
+            .then(m => m.delete({ timeout: 5000}));
+
         }
         
         if(!args[0]) {
             message.channel.send("There is no code to evaluate")
+            .then(m => m.delete({ timeout: 5000}));
+
+
         }
 
             try{
@@ -23,22 +29,23 @@ module.exports = {
                 const code = args.join(" ");
                 let evaluated = eval(code);
     
-                let embed = new MessageEmbed()
+                let embed = new Discord.RichEmbed()
                     .setTimestamp()
-                    .setFooter(client.user.username)
+                    //.setFooter(client.user.username)
                     .setTitle("Eval")
                     .addField("Code to evaluate:", `\`\`\`js\n${beautify(args.join(" "), { format: "js"})}\n\`\`\``) //beautify formats code to look nicer
-                    .addField("Evaluated:", evaluated)
+                    .addField("Result:", evaluated)
 
                     message.channel.send(embed);
 
 
             } catch(err) {
-                let embed = new MessageEmbed()
+                let embed = new Discord.RichEmbed()
                 .setTitle("\:x: Error")
-                .setDescription(e)
-                .setFooter(client.user.username)
+                .setDescription(err)
+               // .setFooter(client.user.username)
     
+                message.channel.send(embed);
             }
 
         
