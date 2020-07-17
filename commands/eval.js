@@ -13,13 +13,13 @@ module.exports = {
         
         if(message.author.id !== "83549337212157952")  {
             return message.reply("Only the bot owner can use this command.")
-            .then(m => m.delete({ timeout: 5000}));
+            //.then(m => m.delete({ timeout: 5000}));
 
         }
         
         if(!args[0]) {
             message.channel.send("There is no code to evaluate")
-            .then(m => m.delete({ timeout: 5000}));
+            //.then(m => m.delete({ timeout: 5000}));
 
 
         }
