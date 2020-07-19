@@ -21,12 +21,14 @@ Command List<br />
 -Add role reactions(react with a certain emote to get the role)-DONE<br />
 -Eval command(run any line of javascript code)-DONE<br />
 -Command to set welcome messages in given channel<br />
+-Update command aliases, usage, and cooldown descriptions<br />
 -Organize commands into folders and update command handler<br />
 -Update role reactions to be a modular command to work on any guild<br />
--Implement audit log functionality, set audit log to certain channel with a command<br />
+-Implement audit log functionality, create modular command<br />
 -Connect to a MySQL server and run queries and display output<br />
 -Schedule messages(announcements)<br />
 -Support for custom commands<br />
+-Play Youtube audio in voice channels(REST API)<br />
 
 
 
