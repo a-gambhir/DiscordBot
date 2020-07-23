@@ -34,10 +34,9 @@ const client = new Discord.Client();
 client.commands = new Discord.Collection(); 
 
 
-client.commands = search('./commands');
+ client.commands = search('./commands');
 
 /*
-client.commands = new Discord.Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('js')); //returns array of all JS filenames in "commands"folder
 
 for(const file of commandFiles){
@@ -61,12 +60,16 @@ client.on('message', message => {
   const args = message.content.slice(prefix.length).split(/ +/);
   const commandName = args.shift().toLowerCase();
 
-  const command = client.commands.get(commandName)
+  console.log(commandName);
+
+
+  let command = client.commands.get(commandName)
     || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
-   if(!command) return; 
+   if(!command){
+     command = client.commands.moderation.get(commandName);
+   } 
 
-   console.log(commandName);
 
   if(command.guildOnly && message.channel.type != 'text'){
     return message.reply('I can\'t execute that command inside DMs.');
@@ -118,7 +121,6 @@ client.on('message', message => {
 
 
 //Deleting message audit log- bot needs VIEW_AUDIT_LOGS permission
-//does not show who deleted the message
 client.on("messageDelete", (message) => {
 
   if (message) {
@@ -135,7 +137,7 @@ client.on("messageDelete", (message) => {
         .setFooter("ID: " + message.id)
         .setTimestamp();
 
-      message.guild.channels.find(channel => channel.name === "log").send(embed);
+      message.guild.channels.find(channel => channel.name === "logs").send(embed);
 
     } else {
 
@@ -158,6 +160,42 @@ client.on("messageDelete", (message) => {
         console.error("message deleted");
 
       }
+
+    }
+
+  }
+
+});
+
+//Editing messages audit log-bot needs VIEW_AUDIT_LOGS permission
+client.on("messageUpdate", (oldMessage, newMessage) => {
+
+  if (oldMessage.content) {
+
+    if (oldMessage.content != newMessage.content) {
+
+      try {
+
+        let user = oldMessage.author;
+
+        let embed = new Discord.RichEmbed()
+          .setAuthor(`${user.username}#${user.discriminator}`, user.avatarURL).setAuthor(`${user.username}#${user.discriminator}`, user.avatarURL)
+          .setDescription(oldMessage.member + "edited a message in channel " + oldMessage.guild.channels.find(channel => channel.name === oldMessage.channel.name) + ` [Goto](${newMessage.url})`)
+          .addField("Before", `${oldMessage.content}`)
+          .addField("After", `${newMessage.content}`)
+          .addField("Time created", new Date(oldMessage.createdTimestamp).toString())
+          .setFooter("ID: " + newMessage.id)
+          .setTimestamp();
+
+        oldMessage.guild.channels.find(channel => channel.name === "logs").send(embed);
+
+
+      } catch (error) {
+
+        console.log(error);
+
+      }
+
 
     }
 

@@ -7,7 +7,7 @@ module.exports = {
 
         if(message.member.roles.find(r => r.name === "Admin")){
             
-        console.log("Role found");
+        console.log("Is Admin");
            
         const amount = parseInt(args[0])+1;
 
