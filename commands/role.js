@@ -1,8 +1,9 @@
 module.exports ={
-    name:'role',
+    commands:'role',
     description:'Add/remove roles, or list all available roles in server.',
+    
 
-   async execute(message, args){
+   callback: async (message, args) => {
 
 
        //admins can set a list of roles that can be added by any user

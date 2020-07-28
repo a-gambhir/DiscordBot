@@ -1,8 +1,11 @@
 module.exports = {
-    name:'user-info',
-    description:'username and id',
+    commands:['user-info','userinfo'],
+    minArgs:0,
+    maxArgs:1,
 
-    execute(message,args){
+    //description:'username and id',
+
+    callback: (message,args) => {
 
         message.channel.send(`Your username: ${message.author.username}\nYour ID: ${message.author.id}`);
         

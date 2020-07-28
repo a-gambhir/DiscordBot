@@ -5,10 +5,12 @@ const beautify = require("beautify");
 
 module.exports = {
 
-    name:'eval',
-    description:'Executes given javascript code',
+    commands:'eval',
+    
+    
+    //description:'Executes given javascript code',
 
-    async execute(message, args){
+    callback:async (message, args) => {
 
         
         if(message.author.id !== "83549337212157952")  {

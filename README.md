@@ -2,6 +2,7 @@
 A Discord Bot made in discord.js to supplement the Scarlet Smash club's discord server at Rutgers University. The bot is used to aid in moderation of the server and guides new users through a welcome process. Utilizes a command handler that dynamically executes commands and makes it easy to create many different commands.  
 
 # Current Features<br /> 
+-Commands for moderation of a server<br />
 -Audit log for deleted messages<br /> 
 -Get roles by reacting to a certain message<br /> 
 
@@ -20,16 +21,17 @@ Command List<br />
     -Connect: Connects to a given MySQL database<br />
 
 # To do List<br /> 
--BOT CRASHES ON MESSAGES W PREFIX THAT ARE NOT COMMAND<br />
+-BOT CRASHES ON MESSAGES WITH PREFIX THAT ARE NOT COMMAND<br />
+-sendMessage command- not working<br />
 -Command to set welcome messages in given channel<br />
--Update command aliases, usage, and cooldown descriptions<br />
--Organize commands into folders and update command handler<br />
--Update role reactions to be a modular command to work on any guild<br />
--Implement audit log functionality, create modular command<br />
+-Update help command with new command handler features<br />
+-Fix listcommands<br />
 -Connect to a MySQL server and run queries and display output<br />
+-Implement audit log functionality, create modular command<br />
 -Schedule messages(announcements)<br />
--Support for custom commands<br />
+-Update role reactions to be a modular command to work on any guild<br />
+-Implement webhooks(twitch/twitter/etc)<br /> 
 -Play Youtube audio in voice channels(REST API)<br />
-
+-Support for custom commands<br />
 
 

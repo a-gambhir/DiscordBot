@@ -1,10 +1,15 @@
 module.exports = {
-    name: 'unmute',
-    description:'Tag a user and unmute them.',
-    guildOnly: true,
+    commands: 'unmute',
+    expectedArgs: '@user',
+    permissionError: 'You need admin permissions to run this command',
+    minArgs: 1,
+    maxArgs: 1,
+    requiredRoles:['Admin'],
+    //description:'Tag a user and unmute them.',
+    //guildOnly: true,
 
 
-    execute(message,args){
+    callback: (message,args) => {
 
         if(message.member.roles.find(r => r.name === "Admin")){
             

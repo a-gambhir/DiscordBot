@@ -1,9 +1,13 @@
 module.exports = {
 
-    name:'connect',
-    description:'Make a connection to a given MySQL server',
+    commands:['connect',],
+    expectedArgs:'<hostname> <databaseName> <username> <password>',
+    minArgs: 4,
+    maxArgs: 4,
+    requiredRoles: ['Admin'],
+    //description:'Make a connection to a given MySQL server',
 
-    execute(message, args){
+    callback: (message, args) => {
 
         var mysql = require('mysql');
 
@@ -21,7 +25,7 @@ module.exports = {
           
         con.connect(error => {
             if(error){
-                message.reply("Could not connect to database. Format: .eval <host> <database> <username> <password>");  
+                message.reply("Could not connect to database. Format: .connect <host> <database> <username> <password>");  
                 throw error;
             }
             message.reply("Connected to database.");

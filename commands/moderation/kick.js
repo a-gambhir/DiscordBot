@@ -1,9 +1,12 @@
 module.exports = {
-    name: 'kick',
-    description:'Tag a member and kick them',
-    guildOnly: true,
+    commands: ['kick'],
+    expectedArgs: '@user',
+    permissionError: 'You need admin permissions to run this command',
+    minArgs: 1,
+    maxArgs: 1,
+    permissions: ['KICK_MEMBERS'],
 
-    async execute(message){
+    callback: async (message) => {
     
         if(message.member.hasPermission('KICK_MEMBERS')){  //performs a check for permissions, also check if they have the admin role
 

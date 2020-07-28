@@ -1,9 +1,15 @@
 module.exports = {
-  name: 'mute',
-  description:'Tag a user and mute them for a certain amount of time',
-  guildOnly: true,
+  commands: 'mute',
+  expectedArgs: '@user',
+  permissionError: 'You need admin permissions to run this command',
+  minArgs: 1,
+  maxArgs: 1,
+  requiredRoles:['Admin'],
+
+  //description:'Tag a user and mute them for a certain amount of time',
+  //guildOnly: true,
   
-    async execute(message,args){
+    callback:async (message,args) => {
 
       let muteRole = message.guild.roles.find(`name`,"Muted");
       let taggedUser = message.mentions.members.first() || message.guild.members.get(args[0]);//message.guild.members.get returns user id, either method in or statement works

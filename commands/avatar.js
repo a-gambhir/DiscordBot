@@ -1,7 +1,10 @@
 module.exports = {
-	name: 'avatar',
-	description: 'Get the avatar URL of the tagged user(s), or your own avatar.',
-	execute(message) {
+	commands: ['avatar', 'pfp', 'icon'],
+	expectedArgs:'@user',
+	minArgs: 0,
+    maxArgs: 1,
+	//description: 'Get the avatar URL of tagged user or self',
+	callback: (message) => {
 		if (!message.mentions.users.size) {
 			return message.channel.send(`Your avatar: ${message.author.displayAvatarURL}`);
 		}

@@ -1,13 +1,14 @@
 module.exports = {
 
-    name:'purge',
-    description:'delete up to 99 messages',
-    execute(message, args){
+    commands: 'purge',
+    expectedArgs: '<number>',
+    permissionError: 'You need admin permissions to run this command',
+    minArgs: 1,
+    maxArgs: 1,
+    requiredRoles:['Admin'],
+    //description:'delete up to 99 messages',
+    callback: (message, args) => {
 
-
-        if(message.member.roles.find(r => r.name === "Admin")){
-            
-        console.log("Is Admin");
            
         const amount = parseInt(args[0])+1;
 
@@ -25,16 +26,5 @@ module.exports = {
 
         });
         }
-        else{
-
-            console.log("Role not found");
-
-
-            return message.reply('You do not have permission to perform that action.');
-
-        }
-
         
-    },
-
 };

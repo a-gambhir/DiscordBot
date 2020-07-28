@@ -1,11 +1,18 @@
 
 const fs = require('fs');//fs = file system module
+const path = require('path');
 const Discord = require('discord.js'); 
 const{ RichEmbed } = require('discord.js');
 const ms = require('ms'); // ms package converts time to ms
 const { prefix, token, ownerID } = require('./config.json');
+const client = new Discord.Client();
+//client.commands = new Discord.Collection(); 
+const cooldowns = new Discord.Collection();
+
+
 
 //searching directory for commands
+/*
 function search(dir){
   const commandList = new Discord.Collection();
   files = fs.readdirSync(dir, {'withFileTypes': true});
@@ -36,7 +43,7 @@ client.commands = new Discord.Collection();
 
  client.commands = search('./commands');
 
-/*
+
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('js')); //returns array of all JS filenames in "commands"folder
 
 for(const file of commandFiles){
@@ -44,14 +51,42 @@ for(const file of commandFiles){
   
   client.commands.set(command.name, command);
 }
+
 */
 
-const cooldowns = new Discord.Collection();
 
-client.once('ready', () => { //when client is ready, print to console
-  console.log('Ready!');
-});
+client.on('ready', async () => { //when client is ready, print to console
+  console.log('Ready!')
 
+  const baseFile = 'command-base.js'
+  const commandBase = require(`./commands/${baseFile}`)
+
+  const readCommands = (dir) => {
+    const files = fs.readdirSync(path.join(__dirname, dir)) //readdirsync returns files in given directory
+
+    for(const file of files){
+
+      //lstatsync gets file status, is file or directory
+      const stat = fs.lstatSync(path.join(__dirname, dir, file))
+      if(stat.isDirectory()){
+        readCommands(path.join(dir, file))
+      } else if (file !== baseFile) {
+        //if its a file, import the options as json object(expectedargs,requiredroles,etc)
+        const option = require(path.join(__dirname, dir, file))
+
+        console.log(file,option)
+        commandBase(client, option)
+        
+      }
+
+    }
+
+  }
+
+  readCommands('commands')
+})
+
+/*
 client.on('message', message => {
 
  
@@ -118,6 +153,7 @@ client.on('message', message => {
 
   
 });
+*/
 
 
 //Deleting message audit log- bot needs VIEW_AUDIT_LOGS permission
