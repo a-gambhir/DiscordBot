@@ -101,11 +101,11 @@ module.exports = (client, commandOptions) => {
                     //check if member has required roles to run command
                     for( const requiredRole of requiredRoles) {
 
-                        const role = guild.roles.cache.find((role) => role.name = requiredRole)
+                        const role = guild.roles.find((role) => role.name === requiredRole)
 
-                        if (!role || !member.roles.cache.has(role.id)){
+                        if (!role || !member.roles.has(role.id)){
                             message.reply(`You must have the "${requiredRole}" role to use this command.`)
-                            return;
+                            return
                         }
 
                     } 

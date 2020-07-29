@@ -8,7 +8,6 @@ module.exports = {
 
     callback: async (message) => {
     
-        if(message.member.hasPermission('KICK_MEMBERS')){  //performs a check for permissions, also check if they have the admin role
 
             if(!message.mentions.users.size){
                 return message.reply('You need to tag a user in order to kick them.');
@@ -21,14 +20,7 @@ module.exports = {
             taggedUser.sendMessage(`You have been kicked from ${message.guild.name}.`);
             taggedUser.kick();
 
-        }
-        else{
-            return message.reply('You do not have permission to perform that action.');
-        }
-
-        
-
-        
+      
     },
 
 };

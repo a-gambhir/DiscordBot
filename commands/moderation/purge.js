@@ -5,12 +5,11 @@ module.exports = {
     permissionError: 'You need admin permissions to run this command',
     minArgs: 1,
     maxArgs: 1,
-    requiredRoles:['Admin'],
     //description:'delete up to 99 messages',
-    callback: (message, args) => {
+    callback: (message, arguments) => {
 
            
-        const amount = parseInt(args[0])+1;
+        const amount = parseInt(arguments[0])+1;
 
         if(isNaN(amount)){
             return message.reply('that doesn\'t seem to be a valid number.');
@@ -25,6 +24,8 @@ module.exports = {
             message.channel.send('there was an error trying to delete messages in this channel.');
 
         });
-        }
+        },
+    
+        requiredRoles:['Admin'],
         
 };

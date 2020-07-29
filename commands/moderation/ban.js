@@ -5,13 +5,13 @@ module.exports = {
     minArgs: 1,
     maxArgs: 1,
     permissions: ['BAN_MEMBERS'],
+
     //description:'Tag a member and ban them',
     //guildOnly: true,
 
 
     callback: async (message, arguments, text) => {
 
-        if(message.member.hasPermissions('BAN_MEMBERS')){
 
             if(!message.mentions.users.size){
                 return message.reply('you need to tag a user in order to ban them.');
@@ -23,14 +23,6 @@ module.exports = {
     
             await taggedUser.sendMessage(`You have been banned from ${message.guild.name}.`);
             await taggedUser.ban();
-
-
-        }
-        else{
-            return message.reply('You do not have permission to perform that action.');
-        }
-
-       
 
         
     },

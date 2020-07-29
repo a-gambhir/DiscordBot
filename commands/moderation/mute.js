@@ -1,10 +1,10 @@
 module.exports = {
   commands: 'mute',
-  expectedArgs: '@user',
+  expectedArgs: '<@user> <time>',
   permissionError: 'You need admin permissions to run this command',
   minArgs: 1,
-  maxArgs: 1,
-  requiredRoles:['Admin'],
+  maxArgs: 2,
+  requiredRoles:['Admin'],  
 
   //description:'Tag a user and mute them for a certain amount of time',
   //guildOnly: true,
@@ -15,9 +15,6 @@ module.exports = {
       let taggedUser = message.mentions.members.first() || message.guild.members.get(args[0]);//message.guild.members.get returns user id, either method in or statement works
       let hasMuteRole = taggedUser.roles.find(role => role.name === 'Muted');    
       
-
-      if(message.member.roles.find(r => r.name === "Admin")){
-        console.log("Role found");
 
         if(!hasMuteRole){
 
@@ -81,13 +78,8 @@ module.exports = {
 
       } 
 
-    }
-
-      else{
-        return message.reply('You do not have permission to perform that action.');
-      }
-  
-
   
       },
+      
+
   };
