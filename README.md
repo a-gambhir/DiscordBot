@@ -1,4 +1,4 @@
-# Scarlet Smash Bot(IN DEVELOPMENT)
+# Discord Bot(IN DEVELOPMENT)
 A Discord Bot made in discord.js to supplement the Scarlet Smash club's discord server at Rutgers University. The bot is used to aid in moderation of the server and guides new users through a welcome process. Utilizes a command handler that dynamically executes commands and makes it easy to create many different commands.  
 
 # Current Features<br /> 
