@@ -1,5 +1,5 @@
 # Discord Bot(IN DEVELOPMENT)
-A Discord Bot made in discord.js originally supplement the Scarlet Smash club's discord server at Rutgers University. The bot was used to aid in moderation of the server and guided new users through a welcome process. Utilizes a command handler that dynamically executes commands and makes it easy to create many different commands. Now it is being updated for personal use.
+A Discord Bot made in discord.js to supplement the Scarlet Smash club's discord server at Rutgers University. The bot is used to aid in moderation of the server and guides new users through a welcome process. Utilizes a command handler that dynamically executes commands and makes it easy to create many different commands.  
 
 # Current Features<br /> 
 -Commands for moderation of a server<br />
