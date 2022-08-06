@@ -1,10 +1,12 @@
-# Scarlet Smash Bot(IN DEVELOPMENT)
-A Discord Bot made in discord.js to supplement the Scarlet Smash club's discord server at Rutgers University. The bot is used to aid in moderation of the server and guides new users through a welcome process. Utilizes a command handler that dynamically executes commands and makes it easy to create many different commands.  
+# Discord Bot(IN DEVELOPMENT)
+A Discord Bot made in discord.js originally supplement the Scarlet Smash club's discord server at Rutgers University. The bot was used to aid in moderation of the server and guided new users through a welcome process. Utilizes a command handler that dynamically executes commands and makes it easy to create many different commands. Now it is being updated for personal use.
 
 # Current Features<br /> 
 -Commands for moderation of a server<br />
--Audit log for deleted messages<br /> 
--Get roles by reacting to a certain message<br /> 
+-Audit log for deleted and edited messages-bot requires VIEW_AUDIT_LOGS permission(audit log only works if channel name is "logs")<br /> 
+-Get roles by reacting to a certain message<br />
+-Play YouTube audio in a voice chat using a search feature or direct URL, can queue multiple songs, skip songs in the queue, or stop.<br />
+
 
 Command List<br /> 
     -Avatar: Gets avatar url of a user<br />
@@ -19,19 +21,22 @@ Command List<br />
     -User-info: Provides username and id<br />
     -Eval: Evaluates given javascript code<br />
     -Connect: Connects to a given MySQL database<br />
+    -Play: Plays audio from a Youtube URL or by searching a video name in a voice chat. If a song is already playing, adds it to the bottom of the queue.<br />
+    -Skip: Skips the current song, plays the next song if there are more songs in the queue.<br />
+    -Stop: Stops the bot from playing audio, resets the queue.<br />
 
 # To do List<br /> 
+-Add a command to view the current song queue.<br />
+-Add permission requirements to the music commands.<br />
 -BOT CRASHES ON MESSAGES WITH PREFIX THAT ARE NOT COMMAND<br />
 -sendMessage command- not working<br />
--Command to set welcome messages in given channel<br />
+-Add a command to set welcome messages in given channel<br />
 -Update help command with new command handler features<br />
 -Fix listcommands<br />
--Connect to a MySQL server and run queries and display output<br />
--Implement audit log functionality, create modular command<br />
+-Create command to set channel to receive audit log messages<br />
 -Schedule messages(announcements)<br />
 -Update role reactions to be a modular command to work on any guild<br />
 -Implement webhooks(twitch/twitter/etc)<br /> 
--Play Youtube audio in voice channels(REST API)<br />
 -Support for custom commands<br />
 
 

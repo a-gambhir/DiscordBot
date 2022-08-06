@@ -6,11 +6,11 @@ module.exports = {
 	//description: 'Get the avatar URL of tagged user or self',
 	callback: (message) => {
 		if (!message.mentions.users.size) {
-			return message.channel.send(`Your avatar: ${message.author.displayAvatarURL}`);
+			return message.channel.send(`Your avatar: ${message.author.avatarURL()}`);
 		}
 
 		const avatarList = message.mentions.users.map(user => {
-			return `${user.username}'s avatar: ${user.displayAvatarURL}`;
+			return `${user.username}'s avatar: ${user.displayAvatarURL()}`;
 		});
 
 		message.channel.send(avatarList);

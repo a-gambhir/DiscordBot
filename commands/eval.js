@@ -31,7 +31,7 @@ module.exports = {
                 const code = args.join(" ");
                 let evaluated = eval(code);
     
-                let embed = new Discord.RichEmbed()
+                let embed = new Discord.MessageEmbed()
                     .setTimestamp()
                     //.setFooter(client.user.username)
                     .setTitle("Eval")
@@ -42,7 +42,7 @@ module.exports = {
 
 
             } catch(err) {
-                let embed = new Discord.RichEmbed()
+                let embed = new Discord.MessageEmbed()
                 .setTitle("\:x: Error")
                 .setDescription(err)
                // .setFooter(client.user.username)

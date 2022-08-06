@@ -11,9 +11,9 @@ module.exports = {
   
     callback:async (message,args) => {
 
-      let muteRole = message.guild.roles.find(`name`,"Muted");
-      let taggedUser = message.mentions.members.first() || message.guild.members.get(args[0]);//message.guild.members.get returns user id, either method in or statement works
-      let hasMuteRole = taggedUser.roles.find(role => role.name === 'Muted');    
+      let muteRole = message.guild.roles.cache.find(role => role.name ==='Muted');
+      let taggedUser = message.mentions.members.first() || message.guild.members.get(args[0]);
+      let hasMuteRole = taggedUser.roles.cache.find(role => role.name === 'Muted');    
       
 
         if(!hasMuteRole){
@@ -53,19 +53,19 @@ module.exports = {
 
           //return message.reply("You did not specify a time.").catch(err => console.log(err));
 
-          await(taggedUser.addRole(muteRole.id));
+          await(taggedUser.roles.add(muteRole.id));
           message.reply(`${taggedUser.user.username} has been muted.`);
 
         }
         else{
 
-          await(taggedUser.addRole(muteRole.id));
+          await(taggedUser.roles.add(muteRole.id));
         message.reply(`${taggedUser.user.username} has been muted for ${ms(ms(muteTime), {long: true})}.`);
 
 
 
           setTimeout(function(){
-            taggedUser.removeRole(muteRole.id);
+            taggedUser.roles.remove(muteRole.id);
             message.channel.send(`${taggedUser.user.username} has been unmuted.`);
           }, ms(muteTime));
 

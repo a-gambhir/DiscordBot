@@ -58,9 +58,9 @@ client.on("messageDelete", (message) => {
 
       let user = message.author;
 
-      let embed = new Discord.RichEmbed()
+      let embed = new Discord.MessageEmbed()
         .setAuthor(`${user.username}#${user.discriminator}`, user.avatarURL)
-        .setDescription(message.member + " deleted in channel " + message.guild.channels.find(channel => channel.name === message.channel.name))
+        .setDescription(message.member + " deleted in channel " + message.guild.channels.cache.find(channel => channel.name === message.channel.name))
         .addField("Message", `Contained image/attachment`)
         .addField("Time created", new Date(message.createdTimestamp).toString())
         .setFooter("ID: " + message.id)
@@ -74,9 +74,9 @@ client.on("messageDelete", (message) => {
 
         let user = message.author;
 
-        let embed = new Discord.RichEmbed()
+        let embed = new Discord.MessageEmbed()
           .setAuthor(`${user.username}#${user.discriminator}`, user.avatarURL)
-          .setDescription(message.member + " deleted in channel " + message.guild.channels.find(channel => channel.name === message.channel.name))
+          .setDescription(message.member + " deleted in channel " + message.guild.channels.cache.find(channel => channel.name === message.channel.name))
           .addField("Message", `${message.content}`)
           .addField("Time created", new Date(message.createdTimestamp).toString())
           .setFooter("ID: " + message.id)
@@ -107,7 +107,7 @@ client.on("messageUpdate", (oldMessage, newMessage) => {
 
         let user = oldMessage.author;
 
-        let embed = new Discord.RichEmbed()
+        let embed = new Discord.MessageEmbed()
           .setAuthor(`${user.username}#${user.discriminator}`, user.avatarURL).setAuthor(`${user.username}#${user.discriminator}`, user.avatarURL)
           .setDescription(oldMessage.member + "edited a message in channel " + oldMessage.guild.channels.find(channel => channel.name === oldMessage.channel.name) + ` [Goto](${newMessage.url})`)
           .addField("Before", `${oldMessage.content}`)
@@ -223,6 +223,39 @@ client.on('messageReactionRemove', (messageReaction, user) => {
 })
 
 
+//BANS FOR PLAYING GENSHIN
+client.on('presenceUpdate', (oldMember, newMember) => {
+  const guild = newMember.guild;
+  member = newMember;
+  if (newMember.user.bot) return;
+  
+  activityLength = newMember.member.presence.activities.length;
+
+  //check to see if the user has an activities, and if so, how many
+  if (activityLength >0 ){
+      console.log("member has " + activityLength + " activities");
+
+      for (let i = 0; i < activityLength; i++) {         
+        
+      console.log("Activity in position " + i + " is " + newMember.member.presence.activities[i].name.toLowerCase());
+      //If you want to ban players of any other game than LOL, changer where it says league of legends to any other lowercase name of a game
+      if (newMember.member.presence.activities[i].name.toLowerCase() == "genshin impact") { // Started playing.
+          console.log(`<a:banned:942166115373678602> ${newMember.user.tag} has been banned for playing Genshin Impact <a:banned:942166115373678602>`);
+          try{
+              guild.members.ban(`${newMember.user.id}`, {reason: 'Playing Genshin Impact'}).catch((err) => {
+              console.error(err);
+              var x = err.message;});
+              break;
+          }
+          catch(err){    
+          }
+      }
+  }
+  } else {
+      console.log("member has no activities");
+  }
+});
+//end of ban code
 
 
 client.login(token);

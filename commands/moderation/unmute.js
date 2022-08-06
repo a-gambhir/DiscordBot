@@ -17,13 +17,13 @@ module.exports = {
 
             let taggedUser = message.mentions.members.first();
 
-            const muteRole = taggedUser.roles.find(role => role.name === 'Muted');                
+            const muteRole = taggedUser.roles.cache.find(role => role.name === 'Muted');                
 
             if(!muteRole){
                 return message.reply('user has not been muted.')       
             }
             else{
-                taggedUser.removeRole(muteRole);
+                taggedUser.roles.remove(muteRole);
                 return message.reply("user has been unmuted.");
             }
 

@@ -13,11 +13,12 @@ module.exports = {
                 return message.reply('You need to tag a user in order to kick them.');
             }
 
-            let taggedUser = message.guild.member(message.mentions.members.first());
+            let taggedUser = message.mentions.members.first();
+            let guildName = message.guild.name;
 
             message.channel.send(`Tagged user has been kicked.`);
 
-            taggedUser.sendMessage(`You have been kicked from ${message.guild.name}.`);
+            taggedUser.sendMessage(`You have been kicked from ${guildName}.`);
             taggedUser.kick();
 
       

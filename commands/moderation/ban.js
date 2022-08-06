@@ -17,11 +17,12 @@ module.exports = {
                 return message.reply('you need to tag a user in order to ban them.');
             }
     
-            let taggedUser = message.guild.member(message.mentions.members.first());
+            let taggedUser = message.mentions.members.first();
+            let guildName = message.guild.name;
         
             message.channel.send(`Tagged user has been banned.`);
     
-            await taggedUser.sendMessage(`You have been banned from ${message.guild.name}.`);
+            await taggedUser.send(`You have been banned from ${guildName}.`);
             await taggedUser.ban();
 
         

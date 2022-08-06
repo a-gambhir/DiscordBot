@@ -13,16 +13,17 @@
     "@discordjs/voice": "^0.6.0",
     "beautify": "0.0.8",
     "discord.js": "^12.5.3",
-    "ffmpeg": "0.0.4",
+    "ffmpeg": "^0.0.4",
     "libsodium-wrappers": "^0.7.9",
     "map": "^1.0.1",
     "ms": "^2.1.2",
     "mysql": "^2.18.1",
-    "node": "^16.9.1",
+    "node": "^17.7.2",
     "opusscript": "0.0.8",
+    "play-dl": "^1.9.4",
     "yarn": "^1.22.11",
     "yt-search": "^2.10.1",
-    "ytdl-core": "^4.9.1"
+    "ytdl-core": "^4.11.0"
   },
   "description": ""
 }
