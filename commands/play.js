@@ -106,7 +106,7 @@ module.exports = {
                 highWaterMark: 1 << 62,
                 liveBuffer: 1 << 62,
                 dlChunkSize: 0, 
-                bitrate: 128,
+                bitrate: 192000,
                 quality: "lowestaudio",
            }).on('error', err => {console.log(err)});
             //const stream  = play.stream(song.url, {discordPlayerCompatibility: true,});

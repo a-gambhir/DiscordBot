@@ -66,7 +66,7 @@ client.on("messageDelete", (message) => {
         .setFooter("ID: " + message.id)
         .setTimestamp();
 
-      message.guild.channels.find(channel => channel.name === "logs").send(embed);
+      message.guild.channels.cache.find(channel => channel.name === "logs").send(embed);
 
     } else {
 
@@ -82,7 +82,7 @@ client.on("messageDelete", (message) => {
           .setFooter("ID: " + message.id)
           .setTimestamp();
 
-        message.guild.channels.find(channel => channel.name === "logs").send(embed);
+        message.guild.channels.cache.find(channel => channel.name === "logs").send(embed);
 
       } catch (error) {
 
@@ -109,14 +109,14 @@ client.on("messageUpdate", (oldMessage, newMessage) => {
 
         let embed = new Discord.MessageEmbed()
           .setAuthor(`${user.username}#${user.discriminator}`, user.avatarURL).setAuthor(`${user.username}#${user.discriminator}`, user.avatarURL)
-          .setDescription(oldMessage.member + "edited a message in channel " + oldMessage.guild.channels.find(channel => channel.name === oldMessage.channel.name) + ` [Goto](${newMessage.url})`)
+          .setDescription(oldMessage.member + "edited a message in channel " + oldMessage.guild.channels.cache.find(channel => channel.name === oldMessage.channel.name) + ` [Goto](${newMessage.url})`)
           .addField("Before", `${oldMessage.content}`)
           .addField("After", `${newMessage.content}`)
           .addField("Time created", new Date(oldMessage.createdTimestamp).toString())
           .setFooter("ID: " + newMessage.id)
           .setTimestamp();
 
-        oldMessage.guild.channels.find(channel => channel.name === "logs").send(embed);
+        oldMessage.guild.channels.cache.find(channel => channel.name === "logs").send(embed);
 
 
       } catch (error) {
@@ -190,7 +190,7 @@ client.on('raw', event => { //occurs whenever any event happens
 
 client.on('messageReactionAdd', (messageReaction, user) => { //add for other roless
 
-  var role = messageReaction.message.guild.roles.get('609201823198347266')//scarlet smasher role id in testing server
+  var role = messageReaction.message.guild.roles.cache.get('609201823198347266')//scarlet smasher role id in testing server
   var emojiName = messageReaction.emoji.name.toLowerCase();
 
   if(emojiName === "moai"){
