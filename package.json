@@ -10,21 +10,22 @@
   "license": "ISC",
   "dependencies": {
     "@discordjs/opus": "^0.6.0",
-    "@discordjs/voice": "^0.6.0",
+    "@discordjs/voice": "^0.16.0",
     "beautify": "0.0.8",
-    "discord.js": "^12.5.3",
+    "discord.js": "^14.11.0",
     "ffmpeg": "^0.0.4",
     "ffmpeg-static": "^4.4.1",
-    "libsodium-wrappers": "^0.7.9",
+    "libsodium-wrappers": "^0.7.11",
     "map": "^1.0.1",
     "ms": "^2.1.2",
     "mysql": "^2.18.1",
     "node": "^17.7.2",
+    "node.js": "^0.0.1-security",
     "opusscript": "0.0.8",
     "play-dl": "^1.9.4",
     "yarn": "^1.22.11",
     "yt-search": "^2.10.1",
-    "ytdl-core": "^4.11.2"
+    "ytdl-core": "^4.11.4"
   },
   "description": ""
 }

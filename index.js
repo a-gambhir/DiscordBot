@@ -1,12 +1,26 @@
+//https://github.com/TannerGabriel/discord-bot
+
+
 
 const fs = require('fs');//fs = file system module
 const path = require('path');
 const Discord = require('discord.js'); 
 const{ RichEmbed } = require('discord.js');
+const { Client, GatewayIntentBits } = require('discord.js');
 const ytdl = require("ytdl-core");
 const ms = require('ms'); // ms package converts time to ms
 const { prefix, token, ownerID } = require('./config.json');
-const client = new Discord.Client();
+const client = new Client({
+	intents: [
+		GatewayIntentBits.Guilds,
+		GatewayIntentBits.GuildMessages,
+		GatewayIntentBits.MessageContent,
+		GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.GuildModeration,
+    GatewayIntentBits.GuildVoiceStates,
+    GatewayIntentBits.GuildMessages,
+	],
+});
 //client.commands = new Discord.Collection(); 
 const cooldowns = new Discord.Collection();
 
@@ -34,7 +48,7 @@ client.on('ready', async () => { //when client is ready, print to console
         //if its a file, import the options as json object(expectedargs,requiredroles,etc)
         const option = require(path.join(__dirname, dir, file))
 
-        console.log(file,option)
+        //console.log(file,option)
         commandBase(client, option)
         
       }
@@ -221,41 +235,6 @@ client.on('messageReactionRemove', (messageReaction, user) => {
   }
 
 })
-
-
-//BANS FOR PLAYING GENSHIN
-client.on('presenceUpdate', (oldMember, newMember) => {
-  const guild = newMember.guild;
-  member = newMember;
-  if (newMember.user.bot) return;
-  
-  activityLength = newMember.member.presence.activities.length;
-
-  //check to see if the user has an activities, and if so, how many
-  if (activityLength >0 ){
-      console.log("member has " + activityLength + " activities");
-
-      for (let i = 0; i < activityLength; i++) {         
-        
-      console.log("Activity in position " + i + " is " + newMember.member.presence.activities[i].name.toLowerCase());
-      //If you want to ban players of any other game than LOL, changer where it says league of legends to any other lowercase name of a game
-      if (newMember.member.presence.activities[i].name.toLowerCase() == "genshin impact") { // Started playing.
-          console.log(`<a:banned:942166115373678602> ${newMember.user.tag} has been banned for playing Genshin Impact <a:banned:942166115373678602>`);
-          try{
-              guild.members.ban(`${newMember.user.id}`, {reason: 'Playing Genshin Impact'}).catch((err) => {
-              console.error(err);
-              var x = err.message;});
-              break;
-          }
-          catch(err){    
-          }
-      }
-  }
-  } else {
-      console.log("member has no activities");
-  }
-});
-//end of ban code
 
 
 client.login(token);

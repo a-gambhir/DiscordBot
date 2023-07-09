@@ -3,6 +3,7 @@ module.exports = { //module.exports allows this command to be used in other file
     minArgs: 0,
     maxArgs: 0,
     callback: (message) => {
+      console.log("Ping!")
       message.reply('Pong!')
     },
   }

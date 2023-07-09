@@ -1,3 +1,4 @@
+
 const { prefix } = require('../config.json')
 
 const validatePermissions = (permissions) => {
@@ -78,10 +79,11 @@ module.exports = (client, commandOptions) => {
 
 
 
-    client.on('message', (message) => {
+    client.on('messageCreate', (message) => {
 
         const { member, content, guild} = message
-        
+        //console.log("Message Found.")
+
         //checks commands array parameter for command name and any aliases
         for(const alias of commands) {
             const command = `${prefix}${alias.toLowerCase()}`

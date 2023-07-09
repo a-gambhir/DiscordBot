@@ -1,6 +1,7 @@
 const { RichEmbed } = require("discord.js");
 const Discord = require('discord.js');
 const beautify = require("beautify");
+const{EmbedBuilder} = require('discord.js');
 //const ownerID = require('./config.json');
 
 module.exports = {
@@ -31,7 +32,7 @@ module.exports = {
                 const code = args.join(" ");
                 let evaluated = eval(code);
     
-                let embed = new Discord.MessageEmbed()
+                let embed = new Discord.EmbedBuilder()
                     .setTimestamp()
                     //.setFooter(client.user.username)
                     .setTitle("Eval")
@@ -42,7 +43,7 @@ module.exports = {
 
 
             } catch(err) {
-                let embed = new Discord.MessageEmbed()
+                let embed = new Discord.EmbedBuilder()
                 .setTitle("\:x: Error")
                 .setDescription(err)
                // .setFooter(client.user.username)
